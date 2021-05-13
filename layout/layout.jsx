@@ -18,6 +18,8 @@ module.exports = class extends Component {
             <Head site={site} config={config} helper={helper} page={page} />
             <body class={`is-${columnCount}-column`}>
                 <Navbar config={config} helper={helper} page={page} />
+                <script type="text/javascript" src="/js/night.js"></script>  
+                <canvas id="universe"></canvas>
                 <section class="section">
                     <div class="container">
                         <div class="columns">
@@ -36,7 +38,8 @@ module.exports = class extends Component {
                 </section>
                 <Footer config={config} helper={helper} />
                 <Scripts site={site} config={config} helper={helper} page={page} />
-                <Search config={config} helper={helper} />
+                <Search config={config} helper={helper} /> 
+                <script type="text/javascript" src="/js/universe.js"></script>
             </body>
         </html>;
     }
