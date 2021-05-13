@@ -18,6 +18,8 @@ class Navbar extends Component {
         const {
             logo,
             logoUrl,
+            logoLightUrl,
+            logoDarkUrl,
             siteUrl,
             siteTitle,
             menu,
@@ -33,7 +35,11 @@ class Navbar extends Component {
             if (logo.text) {
                 navbarLogo = logo.text;
             } else {
-                navbarLogo = <img src={logoUrl} alt={siteTitle} height="28" />;
+                // navbarLogo = <img src={logoUrl} alt={siteTitle} height="28" />;
+                navbarLogo = [
+                    <img class="logo-img" src={logoLightUrl} alt={siteTitle} height="28" />,
+                    <img class="logo-img-dark" src={logoDarkUrl} alt={siteTitle} height="28" />
+                ];
             }
         } else {
             navbarLogo = siteTitle;
@@ -83,6 +89,9 @@ module.exports = cacheComponent(Navbar, 'common.navbar', props => {
     const { url_for, _p, __ } = helper;
     const { logo, title, navbar, widgets, search } = config;
 
+    const logoLight = logo instanceof String ? logo : logo.light
+    const logoDark = logo instanceof String ? logo : logo.dark
+
     const hasTocWidget = Array.isArray(widgets) && widgets.find(widget => widget.type === 'toc');
     const showToc = (config.toc === true || page.toc) && hasTocWidget && ['page', 'post'].includes(page.layout);
 
@@ -110,6 +119,8 @@ module.exports = cacheComponent(Navbar, 'common.navbar', props => {
     return {
         logo,
         logoUrl: url_for(logo),
+        logoLightUrl: url_for(logoLight),
+        logoDarkUrl: url_for(logoDark),
         siteUrl: url_for('/'),
         siteTitle: title,
         menu,
